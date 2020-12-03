@@ -10,5 +10,6 @@ TODO: set filter for read length after cutting
 
 ## consensus.sh
 Takes as input the cut up fastq files for each read and creates a consensus for each
+  make sure only taking those with multiple reads, and then adding the singletons at the end if user wants
 Two methods available
 Output is a fastq (or fasta) file with the consensus reads (one for each *amplicon*) that can be used downstream as usual
