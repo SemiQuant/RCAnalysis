@@ -6,7 +6,7 @@ require(sarlacc)
 args = commandArgs(trailingOnly=TRUE)
 dir_in <- args[1]
 # dir_in <- "/Users/SemiQuant/Bioinformatics/Projects/RCAnalysis/test"
-files <- list.files(path = dir_in, pattern = ".fq", full.names = T)
+files <- list.files(path = dir_in, pattern = "_multiple.fq", full.names = T)
 
 
 for (reads_in in files){
