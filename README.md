@@ -27,6 +27,7 @@ Searches for the primer sequence in each read cuts them up, creating a fastq fil
 | -mn, --max\_len | Maximum length of cut sequence | 9999999 |
 | -o, --out | Output folder | cwd |
 
+![Flow](reads.png)
 
 
 ## consensus.sh
