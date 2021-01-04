@@ -7,9 +7,9 @@ lorem ipsum
 
 
 ## RCAnalysis_SplitReads
-*Takes as input MinION fastq files and primer sequence
-*Searches for the primer sequence in each read cuts them up, creating a fastq file for each
-  *Has option for RCA and dumbell/LAMP methods
+-Takes as input MinION fastq files and primer sequence
+-Searches for the primer sequence in each read cuts them up, creating a fastq file for each
+  -Has option for RCA and dumbell/LAMP methods
     For dumbell method, has option to re-orientate reads
   It does not remove the primer sequence, so these must be sof clipped in alignment (or trimmed before)
     Does this cause issue with the consensus calling script? I dont think so (but its easy to edit if it does)
