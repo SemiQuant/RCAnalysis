@@ -13,6 +13,8 @@ lorem ipsum
     - For dumbell method, has option to re-orientate reads
   - It does not remove the primer sequence, so these must be sof clipped in alignment (or trimmed before)
     - Does this cause issue with the consensus calling script? I dont think so (but its easy to edit if it does)
+    
+    add read count to header
 
 
 ### Usage
