@@ -1,10 +1,11 @@
 # RCAnalysis
 
 Work in progress
+TODO:
+- add read count to header
 
-Required software/packages
+## Required software/packages
 lorem ipsum
-
 
 ## RCAnalysis_SplitReads
 - Takes as input MinION fastq files and primer sequence
@@ -13,9 +14,6 @@ lorem ipsum
     - For dumbell method, has option to re-orientate reads
   - It does not remove the primer sequence, so these must be sof clipped in alignment (or trimmed before)
     - Does this cause issue with the consensus calling script? I dont think so (but its easy to edit if it does)
-    
-    add read count to header
-
 
 ### Usage
 | **Flag** | **Description** | **Default Value** |
