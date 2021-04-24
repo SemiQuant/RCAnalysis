@@ -22,7 +22,7 @@ mod = "r941_min_fast_g330"
 ## Method A ##
 if [[ $method == "A" || $method == "a" || $method == "C" || $method == "c" ]]
 then
-    Rscript "${script_dir}/methodA.R.R" "$file_dir_in"
+    Rscript "${script_dir}/methodA.R" "$file_dir_in"
     # bowtie2 --local -x ${ref/.fa*/} -U "${file_in/.f*/.consensus.fastq}" -S "${name}.methodB.consensus.sam" --threads $threads
     # samtools view -bS "${name}.methodB.consensus.sam" | samtools sort -o "${name}.methodB.consensus.bam"
     # samtools index "${name}.methodB.consensus.bam"
