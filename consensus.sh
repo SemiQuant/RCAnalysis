@@ -44,13 +44,19 @@ then
     for reads in $(ls $file_dir_in/*.fq)
     do
         #this is a reference agnostic approach
-        filtlong --keep_percent 1 "$reads" | head -n 2 | tail -n 1 >> "read_${count}_best.fa"
+        # filtlong --keep_percent 1 "$reads" | head -n 2 | tail -n 1 >> "read_${count}_best.fa"
+        #incase read names are duplicated
+        awk '{print (NR%4 == 1) ? "@1_" ++i : $0}' "$reads" > "${reads}.tmp.fq"
+        reads="${reads}.tmp.fq"
+        echo ">$(basename ${reads%%.*})" > "${reads%%.*}_${count}_best.fa"
+        filtlong --keep_percent 1 "$reads" | head -n 2 | tail -n 1 >> "${reads%%.*}_${count}_best.fa"
         i=0
         while [[ $i -lt $RNDracon ]]
         do
-            draft="read_${count}_best.fa" #to readsm above - will get overwritten here
-            minimap2 -ax map-ont "${draft}" "$reads" > "read_${count}.sam"
-            aln="read_${count}.sam"
+            #to readsm above - will get overwritten here
+            draft="${reads%%.*}_${count}_best.fa"
+            minimap2 -ax map-ont "${draft}" "$reads" > "${reads%%.*}_${count}.sam"
+            aln="${reads%%.*}_${count}.sam"
 
             if [[ $racon_or_medaka == "racon" ]]
             then
