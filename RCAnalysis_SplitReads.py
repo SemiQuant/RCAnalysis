@@ -38,7 +38,7 @@ optional_group.add_argument("-o", "--out", help="Output folder [Default: cwd]")
 args = parser.parse_args()
 fastq_in = args.fastq
 primer_seq = args.primer
-primer_seq_c = Seq(primer_seq).complement() #also .reverse_complement()
+primer_seq_c = Seq(primer_seq).reverse_complement() #also .complement()
 is_dumbell = args.is_dumbell
 dumbell_comp = args.no_dumbell_comp
 max_d = args.distance
@@ -138,7 +138,7 @@ for record in SeqIO.parse(fastq_in, "fastq"):
             if min_len <= cut_len <= max_len:
                 if not(dumbell_comp) and db_order[i]: # we need to the complement those reads with the complement of the primer sequence (qual score will stay the same)
     #                 Figure out which ones they are and do this
-                    record.seq = record.seq.complement()
+                    record.seq = record.seq.reverse_complement()
                 records_tmp.append(record[strts[i]:strts[i+1]])
                 passed_lengths_ind.append(cut_len)
 
@@ -147,12 +147,12 @@ for record in SeqIO.parse(fastq_in, "fastq"):
         # this can now be passed to the other script to make a consensus
         primer_starts.append(len(strts)-1) #or -2?
 
-diff_lens = [max(i)-min(i) for i in passed_lengths]
-logging.info("The median distance between the shortest and longest read lengths in the cut sequences is %d" % statistics.median(diff_lens))
-
-with_seq = len([i for i in primer_starts if i > 1]) 
-print("From the %d input reads, %d had more than one primer start and there was a media of %d primer starts. The mean length of the median cut reads per sample output is %d" % (read_count, with_seq, statistics.mean(primer_starts), statistics.median([statistics.median(i) for i in passed_lengths])))
-
-
+try:
+    diff_lens = [max(i)-min(i) for i in passed_lengths]
+    logging.info("The median distance between the shortest and longest read lengths in the cut sequences is %d" % statistics.median(diff_lens))
+    with_seq = len([i for i in primer_starts if i > 1]) 
+    print("From the %d input reads, %d had more than one primer start and there was a media of %d primer starts. The mean length of the median cut reads per sample output is %d" % (read_count, with_seq, statistics.mean(primer_starts), statistics.median([statistics.median(i) for i in passed_lengths])))
+except:
+    print("cant calc median, probaly no data")
 
 
