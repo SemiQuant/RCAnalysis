@@ -29,9 +29,9 @@ optional_group.add_argument("-c", "--no_dumbell_comp", action='store_true',
                             help="If this a dumbell amplicon, should the complemtary sequence NOT be complemented?")
 optional_group.add_argument("-d", "--distance", default = 2, type = int,
                             help="Maximum Levenshtein distance for primer search [Default: 2]")
-optional_group.add_argument("-mx", "--min_len", default = 2, type = int,
+optional_group.add_argument("-mn", "--min_len", default = 2, type = int,
                             help="Minimum length of cut sequence [Default: 2]")
-optional_group.add_argument("-mn", "--max_len", default = 9999999, type = int,
+optional_group.add_argument("-mx", "--max_len", default = 9999999, type = int,
                             help="Maximum length of cut sequence [Default: 9999999]")
 optional_group.add_argument("-o", "--out", help="Output folder [Default: cwd]")
 
