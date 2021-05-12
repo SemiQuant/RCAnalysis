@@ -15,7 +15,7 @@ file_dir_in = "path to reads"
 # Only method B options
 RNDracon = 3
 threads = 1
-mod = "r941_min_fast_g330"
+mod = "r941_min_high_g360"
 # this takes in the deconcatenated fastq files and calls a consensus that can then be used downstream for alignment
 # below is based on my MinION_UMI script
 
@@ -54,6 +54,8 @@ then
         while [[ $i -lt $RNDracon ]]
         do
             #to readsm above - will get overwritten here
+            rm calls_to_draft.bam calls_to_draft.bam.bai consensus_probs.hdf consensus.fasta.gaps_in_draft_coords.bed
+            
             draft="${reads%%.*}_${count}_best.fa"
             minimap2 -ax map-ont "${draft}" "$reads" > "${reads%%.*}_${count}.sam"
             aln="${reads%%.*}_${count}.sam"
@@ -68,7 +70,7 @@ then
             # Medaka has been trained to correct draft sequences processed through racon, specifically racon run four times iteratively with: racon -m 8 -x -6 -g -8 -w 500 ...
             if [[ $i == $RNDracon || $racon_or_medaka != "racon" ]]
             then
-                medaka_consensus --model $mod -i "${reads}" -d "${draft}" -t ${threads} -o $( dirname $draft )
+                medaka_consensus -m "${mod}" -i "${reads}" -d "${draft}" -t ${threads} -o $( dirname $draft )
                 mv "$( dirname $draft )/consensus.fasta" ${draft}
             fi
             i=$[$i+1]
