@@ -1,0 +1,51 @@
+module load Sali
+module load anaconda
+source /wynton/home/ernst/jdlim/conda_init.sh
+conda activate pipeline-umi-amplicon
+
+FaToFq () {
+  cat "$1" | sed -n '1~4s/^@/>/p;2~4p'  > ${1/.f*/.fa}
+}
+
+
+cd "/wynton/home/ernst/jdlim/F6/F6_split/multiple/all/del"
+min_len=500
+min_depth=2
+threads=8
+
+
+for reads in $(ls *.fq)
+do
+    FaToFq "${reads}" > "${reads/.f*/.fa}"
+done
+
+
+files_per_dir=100
+set -- *.fa
+
+n=0
+for filename do
+    n=$(( n + 1 ))
+    N=$(( (n/files_per_dir) + 1 ))
+    [ ! -d "${N}_files" ] && mkdir "${N}_files"
+    mv -i -- "$filename" "${N}_files"
+done
+
+
+
+for D in *
+do
+    if [ -d "${D}" ]
+    then
+        medaka smolecule --threads $threads --method spoa --depth $min_depth --length $min_len $(ls $D/*.fa) "${D}"
+        #--model r941_min_fast_g303 
+        cat "./${D}/consensus.fasta" >> consensus.fa
+    fi
+done
+
+
+
+
+
+        
+
