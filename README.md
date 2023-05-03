@@ -35,3 +35,16 @@ lorem ipsum
   - make sure only taking those with multiple reads, and then adding the singletons at the end if user wants
 - Two methods available
 - Output is a fastq (or fasta) file with the consensus reads (one for each *amplicon*) that can be used downstream as usual
+
+### Citation
+[Limberis, Jason D., Alina Nalyvayko, Joel D. Ernst, and John Z. Metcalfe. "Circularization of rv0678 for genotypic bedaquiline resistance testing of Mycobacterium tuberculosis." Microbiology Spectrum (2023): e04127-22.](https://journals.asm.org/doi/abs/10.1128/spectrum.04127-22)
+
+
+
+### easyDB
+https://user-images.githubusercontent.com/8179171/236018064-c66bd83c-88cc-48a8-a9c0-9d51c71da08b.mp4
+
+### uDumBell
+https://user-images.githubusercontent.com/8179171/236018231-8137537f-f6c5-4397-9387-fc140d762576.mp4
+
+
